@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c:OldCards xmlns:c="OldCards"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="card.xsd">
+    <c:SentCard id="567" author="Aversev" textContent="XOXO">
+        <theme>animals</theme>
+        <cardType>greeting</cardType>
+        <country>Belarus</country>
+        <hasMelody>false</hasMelody>
+        <sendingTime>2021-10-10T18:00:00</sendingTime>
+    </c:SentCard>
+
+    <c:SentCard id="65" textContent="Welcome to the concert!">
+        <theme>people</theme>
+        <cardType>advertising</cardType>
+        <country>Russia</country>
+        <hasMelody>false</hasMelody>
+        <sendingTime>2021-10-08T13:00:00</sendingTime>
+    </c:SentCard>
+</c:OldCards>
