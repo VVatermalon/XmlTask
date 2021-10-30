@@ -15,6 +15,8 @@ public class OldCards {
         this.cards = cards;
     }
 
+    static void Hello(){}
+
     public ArrayList<Card> getCards() {
         return (ArrayList<Card>)Collections.unmodifiableList(cards);
     }
