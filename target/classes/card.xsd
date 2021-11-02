@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="OldCards"
+        xmlns:c="OldCards">
+
+    <element name="OldCards">
+        <complexType>
+            <sequence>
+                <element ref="c:Card" maxOccurs="unbounded"/>
+            </sequence>
+        </complexType>
+    </element>
+
+    <complexType name="CardType">
+        <sequence>
+            <element name="theme" maxOccurs="unbounded">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="cityscape"/>
+                        <enumeration value="people"/>
+                        <enumeration value="religion"/>
+                        <enumeration value="sports"/>
+                        <enumeration value="architecture"/>
+                        <enumeration value="animals"/>
+                        <enumeration value="cars"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="cardType">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="greeting"/>
+                        <enumeration value="advertising"/>
+                        <enumeration value="default"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="country">
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="Belarus"/>
+                        <enumeration value="Russia"/>
+                        <enumeration value="Poland"/>
+                        <enumeration value="Lithuania"/>
+                    </restriction>
+                </simpleType>
+            </element>
+            <element name="hasMelody" type="boolean"/>
+        </sequence>
+        <attribute name="id" use="required">
+            <simpleType>
+                <restriction base="ID">
+                    <pattern value="\w\d{1,5}"/>
+                </restriction>
+            </simpleType>
+        </attribute>
+        <attribute name="author" type="string"/>
+    </complexType>
+
+    <complexType name="SentCardType">
+        <complexContent>
+            <extension base="c:CardType">
+                <sequence>
+                    <element name="sendingTime" type="dateTime"/>
+                </sequence>
+                <attribute name="textContent" type="string" default="Congratulations!">
+                    <simpleType>
+                        <restriction base="string">
+                            <minLength value="2"/>
+                            <maxLength value="100"/>
+                        </restriction>
+                    </simpleType>
+                </attribute>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="StoreCardType">
+        <complexContent>
+            <extension base="c:CardType">
+                <sequence>
+                    <element name="price" type="c:PriceType"/>
+                    <element name="remainsCount" type="nonNegativeInteger"/>
+                </sequence>
+                <attribute name="publicationYear" type="gYear"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <complexType name="HandmadeCardType">
+        <complexContent>
+            <extension base="c:CardType">
+                <sequence>
+                    <element name="price" type="c:PriceType"/>
+                    <element name="craftType">
+                        <simpleType>
+                            <restriction base="string">
+                                <enumeration value="pop-up"/>
+                                <enumeration value="scrapbooking"/>
+                                <enumeration value="simple"/>
+                            </restriction>
+                        </simpleType>
+                    </element>
+                </sequence>
+                <attribute name="craftingTime" type="duration" default="P1D"/>
+            </extension>
+        </complexContent>
+    </complexType>
+
+    <simpleType name="PriceType">
+        <restriction base="double">
+            <minInclusive value="0.5"/>
+            <maxExclusive value="100"/>
+            <fractionDigits value="2"/>
+        </restriction>
+    </simpleType>
+
+    <element name="Card" type="c:CardType" abstract="true"/>
+    <element name="SentCard" type="c:SentCardType" substitutionGroup="c:Card"/>
+    <element name="StoreCard" type="c:StoreCardType" substitutionGroup="c:Card"/>
+    <element name="HandmadeCard" type="c:HandmadeCardType" substitutionGroup="c:Card"/>
+</schema>
