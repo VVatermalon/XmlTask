@@ -50,7 +50,7 @@
         <attribute name="id" use="required">
             <simpleType>
                 <restriction base="ID">
-                    <pattern value="w\d{1,5}"/>
+                    <pattern value="\w\d{1,5}"/>
                 </restriction>
             </simpleType>
         </attribute>
@@ -77,34 +77,43 @@
 
     <complexType name="StoreCardType">
         <complexContent>
-            <restriction base="c:CardType">
+            <extension base="c:CardType">
                 <sequence>
-                    <element name="price" type="positiveInteger"/>
+                    <element name="price" type="c:PriceType"/>
                     <element name="remainsCount" type="nonNegativeInteger"/>
                 </sequence>
                 <attribute name="publicationYear" type="gYear"/>
-            </restriction>
+            </extension>
         </complexContent>
     </complexType>
 
     <complexType name="HandmadeCardType">
         <complexContent>
-            <restriction base="c:CardType">
+            <extension base="c:CardType">
                 <sequence>
-                    <element name="price" type="positiveInteger"/>
+                    <element name="price" type="c:PriceType"/>
                     <element name="craftType">
                         <simpleType>
                             <restriction base="string">
-                                <enumeration value="popUp"/>
+                                <enumeration value="pop-up"/>
                                 <enumeration value="scrapbooking"/>
+                                <enumeration value="simple"/>
                             </restriction>
                         </simpleType>
                     </element>
-                    <element name="craftingTime" type="duration" default="P1D"/>
                 </sequence>
-            </restriction>
+                <attribute name="craftingTime" type="duration" default="P1D"/>
+            </extension>
         </complexContent>
     </complexType>
+
+    <simpleType name="PriceType">
+        <restriction base="double">
+            <minInclusive value="0.5"/>
+            <maxExclusive value="100"/>
+            <fractionDigits value="2"/>
+        </restriction>
+    </simpleType>
 
     <element name="Card" type="c:CardType" abstract="true"/>
     <element name="SentCard" type="c:SentCardType" substitutionGroup="c:Card"/>
