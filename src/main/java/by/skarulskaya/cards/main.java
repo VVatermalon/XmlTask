@@ -1,6 +1,8 @@
 package by.skarulskaya.cards;
 
-import by.skarulskaya.cards.builder.SimpleCardHandler;
+import by.skarulskaya.cards.builder.CardHandler;
+import by.skarulskaya.cards.builder.SaxCardBuilder;
+import by.skarulskaya.cards.exception.CardException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
@@ -15,14 +17,13 @@ public class main {
     static final String SRC = "card.xml";
     public static void main(String[] args) {
         try {
-            SimpleCardHandler handler = new SimpleCardHandler();
-            XMLReader reader = XMLReaderFactory.createXMLReader();
-            reader.setContentHandler(handler);
+            SaxCardBuilder builder = new SaxCardBuilder();
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             URL resource = classLoader.getResource(SRC);
-            reader.parse(resource.toString());
+            builder.buildCards(resource.toString());
+            builder.getCards().forEach(logger::info);
         }
-        catch(SAXException | IOException e) {
+        catch(CardException e) {
             logger.error(e);
         }
     }

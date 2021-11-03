@@ -1,39 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<c:OldCards xmlns:c="OldCards"
-             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-             xsi:schemaLocation="card.xsd">
+<oldCards xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="card.xsd">
 
-    <c:StoreCard id="k37" publicationYear="2015">
+    <storeCard id="k37">
         <theme>cars</theme>
-        <cardType>greeting</cardType>
+        <type>greeting</type>
         <country>Russia</country>
         <hasMelody>true</hasMelody>
         <price>3.33</price>
-        <remainsCount>1</remainsCount>
-    </c:StoreCard>
+        <publicationYear>2015</publicationYear>
+    </storeCard>
 
-    <c:SentCard id="i378" author="Aversev" textContent="XOXO">
+    <sentCard id="i378" author="Aversev" textContent="XOXO">
         <theme>animals</theme>
-        <cardType>greeting</cardType>
+        <type>greeting</type>
         <country>Belarus</country>
         <hasMelody>false</hasMelody>
         <sendingTime>2021-10-10T18:00:00</sendingTime>
-    </c:SentCard>
+    </sentCard>
 
-    <c:SentCard id="k3" textContent="Welcome to the concert!">
+    <sentCard id="k3" textContent="Welcome to the concert!">
         <theme>people</theme>
-        <cardType>advertising</cardType>
+        <type>advertising</type>
         <country>Russia</country>
         <hasMelody>false</hasMelody>
         <sendingTime>2021-10-08T13:00:00</sendingTime>
-    </c:SentCard>
+    </sentCard>
 
-    <c:HandmadeCard id="c10" craftingTime="PT10H" author="Hey Helen">
+    <handmadeCard id="c10" author="Hey Helen">
         <theme>animals</theme>
-        <cardType>greeting</cardType>
+        <type>greeting</type>
         <country>Lithuania</country>
         <hasMelody>false</hasMelody>
         <price>40</price>
-        <craftType>simple</craftType>
-    </c:HandmadeCard>
-</c:OldCards>
+        <craftingTime>PT10H</craftingTime>
+    </handmadeCard>
+</oldCards>

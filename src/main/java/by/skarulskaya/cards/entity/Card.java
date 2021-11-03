@@ -26,6 +26,10 @@ public abstract class Card {
         return id;
     }
 
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public CardTheme getTheme() {
         return theme;
     }

@@ -5,9 +5,11 @@ import java.util.Optional;
 
 public class SentCard extends Card {
     private LocalDateTime sendingTime;
-    private String textContent;
+    private Optional<String> textContent;
 
-    public SentCard(String id, CardTheme theme, CardType type, CardCountry country, Optional<String> author, boolean hasMelody, LocalDateTime sendingTime, String textContent) {
+    public SentCard() {}
+
+    public SentCard(String id, CardTheme theme, CardType type, CardCountry country, Optional<String> author, boolean hasMelody, LocalDateTime sendingTime, Optional<String> textContent) {
         super(id, theme, type, country, author, hasMelody);
         this.sendingTime = sendingTime;
         this.textContent = textContent;
@@ -21,11 +23,11 @@ public class SentCard extends Card {
         this.sendingTime = sendingTime;
     }
 
-    public String getTextContent() {
+    public Optional<String> getTextContent() {
         return textContent;
     }
 
-    public void setTextContent(String textContent) {
+    public void setTextContent(Optional<String> textContent) {
         this.textContent = textContent;
     }
 
@@ -33,7 +35,7 @@ public class SentCard extends Card {
     public String toString() {
         final StringBuffer sb = new StringBuffer("SentCard{");
         sb.append(super.toStringParams());
-        sb.append("sendingTime=").append(sendingTime);
+        sb.append(", sendingTime=").append(sendingTime);
         sb.append(", textContent='").append(textContent).append('\'');
         sb.append('}');
         return sb.toString();

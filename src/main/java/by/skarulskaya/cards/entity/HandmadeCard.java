@@ -5,13 +5,13 @@ import java.util.Optional;
 
 public class HandmadeCard extends Card {
     private double price;
-    private CraftType craftType;
     private Duration craftingTime;
 
-    public HandmadeCard(String id, CardTheme theme, CardType type, CardCountry country, Optional<String> author, boolean hasMelody, double price, CraftType craftType, Duration craftingTime) {
+    public HandmadeCard(){}
+
+    public HandmadeCard(String id, CardTheme theme, CardType type, CardCountry country, Optional<String> author, boolean hasMelody, double price, Duration craftingTime) {
         super(id, theme, type, country, author, hasMelody);
         this.price = price;
-        this.craftType = craftType;
         this.craftingTime = craftingTime;
     }
 
@@ -19,16 +19,8 @@ public class HandmadeCard extends Card {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
-    }
-
-    public CraftType getCraftType() {
-        return craftType;
-    }
-
-    public void setCraftType(CraftType craftType) {
-        this.craftType = craftType;
     }
 
     public Duration getCraftingTime() {
@@ -44,7 +36,6 @@ public class HandmadeCard extends Card {
         final StringBuffer sb = new StringBuffer("HandmadeCard{");
         sb.append(super.toStringParams());
         sb.append(", price=").append(price);
-        sb.append(", craftType=").append(craftType);
         sb.append(", craftingTime=").append(craftingTime);
         sb.append('}');
         return sb.toString();
@@ -60,7 +51,6 @@ public class HandmadeCard extends Card {
         HandmadeCard that = (HandmadeCard) o;
 
         if (Double.compare(that.price, price) != 0) return false;
-        if (craftType != null ? craftType != that.craftType : that.craftType  != null) return false;
         return craftingTime != null ? craftingTime.equals(that.craftingTime) : that.craftingTime == null;
     }
 
@@ -70,7 +60,6 @@ public class HandmadeCard extends Card {
         long temp;
         temp = Double.doubleToLongBits(price);
         result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + (craftType != null ? craftType.ordinal() : 0);
         result = 31 * result + (craftingTime != null ? craftingTime.hashCode() : 0);
         return result;
     }

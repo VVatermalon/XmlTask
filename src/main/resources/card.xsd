@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema"
-        targetNamespace="OldCards"
-        xmlns:c="OldCards">
+        targetNamespace="http://example.org/OldCards"
+        xmlns:c="http://example.org/OldCards"
+        elementFormDefault="qualified">
 
-    <element name="OldCards">
+    <element name="oldCards">
         <complexType>
             <sequence>
-                <element ref="c:Card" maxOccurs="unbounded"/>
+                <element ref="c:card" maxOccurs="unbounded"/>
             </sequence>
         </complexType>
     </element>
 
-    <complexType name="CardType">
+    <complexType name="cardType">
         <sequence>
             <element name="theme" maxOccurs="unbounded">
                 <simpleType>
@@ -26,7 +27,7 @@
                     </restriction>
                 </simpleType>
             </element>
-            <element name="cardType">
+            <element name="type">
                 <simpleType>
                     <restriction base="string">
                         <enumeration value="greeting"/>
@@ -57,9 +58,9 @@
         <attribute name="author" type="string"/>
     </complexType>
 
-    <complexType name="SentCardType">
+    <complexType name="sentCardType">
         <complexContent>
-            <extension base="c:CardType">
+            <extension base="c:cardType">
                 <sequence>
                     <element name="sendingTime" type="dateTime"/>
                 </sequence>
@@ -75,39 +76,29 @@
         </complexContent>
     </complexType>
 
-    <complexType name="StoreCardType">
+    <complexType name="storeCardType">
         <complexContent>
-            <extension base="c:CardType">
+            <extension base="c:cardType">
                 <sequence>
-                    <element name="price" type="c:PriceType"/>
-                    <element name="remainsCount" type="nonNegativeInteger"/>
+                    <element name="price" type="c:priceType"/>
+                    <element name="publicationYear" type="gYear"/>
                 </sequence>
-                <attribute name="publicationYear" type="gYear"/>
             </extension>
         </complexContent>
     </complexType>
 
-    <complexType name="HandmadeCardType">
+    <complexType name="handmadeCardType">
         <complexContent>
-            <extension base="c:CardType">
+            <extension base="c:cardType">
                 <sequence>
-                    <element name="price" type="c:PriceType"/>
-                    <element name="craftType">
-                        <simpleType>
-                            <restriction base="string">
-                                <enumeration value="pop-up"/>
-                                <enumeration value="scrapbooking"/>
-                                <enumeration value="simple"/>
-                            </restriction>
-                        </simpleType>
-                    </element>
+                    <element name="price" type="c:priceType"/>
+                    <element name="craftingTime" type="duration" default="P1D"/>
                 </sequence>
-                <attribute name="craftingTime" type="duration" default="P1D"/>
             </extension>
         </complexContent>
     </complexType>
 
-    <simpleType name="PriceType">
+    <simpleType name="priceType">
         <restriction base="double">
             <minInclusive value="0.5"/>
             <maxExclusive value="100"/>
@@ -115,8 +106,8 @@
         </restriction>
     </simpleType>
 
-    <element name="Card" type="c:CardType" abstract="true"/>
-    <element name="SentCard" type="c:SentCardType" substitutionGroup="c:Card"/>
-    <element name="StoreCard" type="c:StoreCardType" substitutionGroup="c:Card"/>
-    <element name="HandmadeCard" type="c:HandmadeCardType" substitutionGroup="c:Card"/>
+    <element name="card" type="c:cardType" abstract="true"/>
+    <element name="sentCard" type="c:sentCardType" substitutionGroup="c:card"/>
+    <element name="storeCard" type="c:storeCardType" substitutionGroup="c:card"/>
+    <element name="handmadeCard" type="c:handmadeCardType" substitutionGroup="c:card"/>
 </schema>
