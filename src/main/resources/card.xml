@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <oldCards xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-            xsi:schemaLocation="card.xsd">
+          xsi:SchemaLocation="card.xsd">
 
     <storeCard id="k37">
         <theme>cars</theme>

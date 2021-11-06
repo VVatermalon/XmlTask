@@ -1,37 +1,25 @@
 package by.skarulskaya.cards;
 
-import by.skarulskaya.cards.builder.CardHandler;
-import by.skarulskaya.cards.builder.DOMCardBuilder;
-import by.skarulskaya.cards.builder.SaxCardBuilder;
-import by.skarulskaya.cards.builder.StAXCardBuilder;
+import by.skarulskaya.cards.builder.*;
 import by.skarulskaya.cards.exception.CardException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
-import org.xml.sax.helpers.XMLReaderFactory;
 
-import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
+import java.nio.file.Paths;
 
 public class main {
     static final Logger logger = LogManager.getLogger();
     static final String SRC = "card.xml";
     public static void main(String[] args) {
         try {
-            SaxCardBuilder builder = new SaxCardBuilder();
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             URL resource = classLoader.getResource(SRC);
-            builder.buildCards(resource.toString());
+            AbstractCardBuilder builder = CardBuilderFactory.getBuilder("STAX");
+            builder.buildCards(Paths.get(resource.toURI()).toString());
             builder.getCards().forEach(logger::info);
-            DOMCardBuilder builderDom = new DOMCardBuilder();
-            builderDom.buildCards(resource.toString());
-            builder.getCards().forEach(logger::info);
-            StAXCardBuilder builderStax = new StAXCardBuilder();
-            builderStax.buildCards(resource.toString());
-            builderStax.getCards().forEach(logger::info);
-        }
-        catch(CardException e) {
+        } catch (CardException | URISyntaxException e) {
             logger.error(e);
         }
     }

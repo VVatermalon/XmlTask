@@ -23,11 +23,19 @@ import java.util.Set;
 
 public class DOMCardBuilder extends AbstractCardBuilder {
     static final Logger logger = LogManager.getLogger();
-    private Set<Card> cards;
     private DocumentBuilder docBuilder;
 
     public DOMCardBuilder() {
-        cards = new HashSet<>();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        try {
+            docBuilder = factory.newDocumentBuilder();
+        } catch (ParserConfigurationException e) {
+            logger.error("Error during DOM parser configuration", e);
+        }
+    }
+
+    public DOMCardBuilder(Set<Card> cards) {
+        super(cards);
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         try {
             docBuilder = factory.newDocumentBuilder();
@@ -108,10 +116,5 @@ public class DOMCardBuilder extends AbstractCardBuilder {
         Node node = nodes.item(0);
         String text  = node.getTextContent();
         return text;
-    }
-
-    @Override
-    Set<Card> getCards() {
-        return cards;
     }
 }

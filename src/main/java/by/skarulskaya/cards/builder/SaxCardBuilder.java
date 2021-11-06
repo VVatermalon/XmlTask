@@ -15,7 +15,19 @@ public class SaxCardBuilder extends AbstractCardBuilder {
 
     public SaxCardBuilder() throws CardException {
         handler = new CardHandler();
-        SAXParserFactory factory = SAXParserFactory.newInstance();
+
+        try {
+            reader = XMLReaderFactory.createXMLReader();
+            reader.setContentHandler(handler);
+            reader.setErrorHandler(new CardErrorHandler());
+        } catch (SAXException e) {
+            throw new CardException("Error during configuration of SAX parser", e);
+        }
+    }
+
+    public SaxCardBuilder(Set<Card> cards) throws CardException {
+        super(cards);
+        handler = new CardHandler();
 
         try {
             reader = XMLReaderFactory.createXMLReader();
@@ -37,10 +49,5 @@ public class SaxCardBuilder extends AbstractCardBuilder {
         }
 
         cards = handler.getCards();
-    }
-
-    @Override
-    public Set<Card> getCards() {
-        return cards;
     }
 }

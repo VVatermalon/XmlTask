@@ -9,7 +9,7 @@ import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
 import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamReader;
-import java.io.StringReader;
+import java.io.*;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.Year;
@@ -19,17 +19,19 @@ import java.util.Set;
 
 public class StAXCardBuilder extends AbstractCardBuilder {
     private static final Logger logger = LogManager.getLogger();
-    private Set<Card> cards;
-    private XMLInputFactory inputFactory;
+    private final XMLInputFactory inputFactory;
 
     public StAXCardBuilder() {
         inputFactory = XMLInputFactory.newInstance();
-        cards = new HashSet<>();
+    }
+    public StAXCardBuilder(Set<Card> cards) {
+        super(cards);
+        inputFactory = XMLInputFactory.newInstance();
     }
     @Override
     public void buildCards(String xmlSrc) throws CardException {
         String name;
-        try (StringReader inputStream = new StringReader(xmlSrc)) {
+        try (FileInputStream inputStream = new FileInputStream(xmlSrc)) {
             XMLStreamReader reader = inputFactory.createXMLStreamReader(inputStream);
             while (reader.hasNext()) {
                 int type = reader.next();
@@ -46,9 +48,11 @@ public class StAXCardBuilder extends AbstractCardBuilder {
                     }
                 }
             }
-        } catch (XMLStreamException e) {
+        } catch (XMLStreamException | FileNotFoundException e) {
             logger.error(e);
             throw new CardException(e);
+        } catch (IOException e) {
+            e.printStackTrace();//todo
         }
     }
 
@@ -110,6 +114,7 @@ public class StAXCardBuilder extends AbstractCardBuilder {
                             ((HandmadeCard) card).setCraftingTime(Duration.parse(getXmlText(reader)));
                             break;
                     }
+                    break;
                 }//todo no default
                 case XMLStreamConstants.END_ELEMENT: {
                     name = reader.getLocalName();
@@ -132,10 +137,5 @@ public class StAXCardBuilder extends AbstractCardBuilder {
             text = reader.getText();
         }
         return text;
-    }
-
-    @Override
-    public Set<Card> getCards() {
-        return cards;
     }
 }
