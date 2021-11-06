@@ -1,7 +1,9 @@
 package by.skarulskaya.cards;
 
 import by.skarulskaya.cards.builder.CardHandler;
+import by.skarulskaya.cards.builder.DOMCardBuilder;
 import by.skarulskaya.cards.builder.SaxCardBuilder;
+import by.skarulskaya.cards.builder.StAXCardBuilder;
 import by.skarulskaya.cards.exception.CardException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,6 +24,12 @@ public class main {
             URL resource = classLoader.getResource(SRC);
             builder.buildCards(resource.toString());
             builder.getCards().forEach(logger::info);
+            DOMCardBuilder builderDom = new DOMCardBuilder();
+            builderDom.buildCards(resource.toString());
+            builder.getCards().forEach(logger::info);
+            StAXCardBuilder builderStax = new StAXCardBuilder();
+            builderStax.buildCards(resource.toString());
+            builderStax.getCards().forEach(logger::info);
         }
         catch(CardException e) {
             logger.error(e);
