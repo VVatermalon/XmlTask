@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oldCards xmlns="http://example.org/OldCards">
+    <storeCard id="k37">
+        <theme>cars</theme>
+        <type>greeting</type>
+        <country>Russia</country>
+        <hasMelody>true</hasMelody>
+        <price>3.33</price>
+        <publicationYear>2015</publicationYear>
+    </storeCard>
+</oldCards>

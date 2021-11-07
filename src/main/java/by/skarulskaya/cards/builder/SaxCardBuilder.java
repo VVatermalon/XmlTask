@@ -2,6 +2,8 @@ package by.skarulskaya.cards.builder;
 
 import by.skarulskaya.cards.entity.Card;
 import by.skarulskaya.cards.exception.CardException;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.xml.sax.SAXException;
 import org.xml.sax.XMLReader;
 import org.xml.sax.helpers.XMLReaderFactory;
@@ -10,6 +12,7 @@ import java.io.IOException;
 import java.util.Set;
 
 public class SaxCardBuilder extends AbstractCardBuilder {
+    static final Logger logger = LogManager.getLogger();
     private CardHandler handler;
     private XMLReader reader;
 
@@ -40,6 +43,10 @@ public class SaxCardBuilder extends AbstractCardBuilder {
 
     @Override
     public void buildCards(String xmlSrc) throws CardException {
+        if(xmlSrc == null) {
+            logger.warn("Null parameter");
+            return;
+        }
         try {
             reader.parse(xmlSrc);
         } catch (IOException e) {

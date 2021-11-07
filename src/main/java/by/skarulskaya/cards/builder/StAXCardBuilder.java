@@ -4,6 +4,7 @@ import by.skarulskaya.cards.entity.*;
 import by.skarulskaya.cards.exception.CardException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.xml.sax.SAXException;
 
 import javax.xml.stream.XMLInputFactory;
 import javax.xml.stream.XMLStreamConstants;
@@ -30,9 +31,13 @@ public class StAXCardBuilder extends AbstractCardBuilder {
     }
     @Override
     public void buildCards(String xmlSrc) throws CardException {
-        String name;
+        if(xmlSrc == null) {
+            logger.warn("Null parameter");
+            return;
+        }
         try (FileInputStream inputStream = new FileInputStream(xmlSrc)) {
             XMLStreamReader reader = inputFactory.createXMLStreamReader(inputStream);
+            String name;
             while (reader.hasNext()) {
                 int type = reader.next();
                 if (type == XMLStreamConstants.START_ELEMENT) {
@@ -48,11 +53,10 @@ public class StAXCardBuilder extends AbstractCardBuilder {
                     }
                 }
             }
-        } catch (XMLStreamException | FileNotFoundException e) {
-            logger.error(e);
-            throw new CardException(e);
         } catch (IOException e) {
-            e.printStackTrace();//todo
+            throw new CardException("Unable to open XML file " + xmlSrc, e);
+        } catch (XMLStreamException e) {
+            throw new CardException("Error during parsing XML file " + xmlSrc, e);
         }
     }
 

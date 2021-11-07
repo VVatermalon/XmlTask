@@ -3,7 +3,6 @@ package by.skarulskaya.cards.builder;
 import by.skarulskaya.cards.entity.*;
 import by.skarulskaya.cards.exception.CardException;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.net.URISyntaxException;
@@ -16,9 +15,10 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
-import static org.testng.Assert.*;
+import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.fail;
 
-public class SaxCardBuilderTest {
+public class StAXCardBuilderTest {
     static String normalData = "cardNormal.xml";
     static String data1Attribute = "card1Attribute.xml";
     static String data2Attributes = "card2Attributes.xml";
@@ -45,7 +45,7 @@ public class SaxCardBuilderTest {
     @Test
     public void testBuildCards() {
         try {
-            SaxCardBuilder builder = new SaxCardBuilder();
+            StAXCardBuilder builder = new StAXCardBuilder();
             builder.buildCards(normalData);
             Set<Card> actual = builder.getCards();
             Set<Card> expected = new HashSet<>();
@@ -63,7 +63,7 @@ public class SaxCardBuilderTest {
     @Test
     public void testBuildCards1Attribute() {
         try {
-            SaxCardBuilder builder = new SaxCardBuilder();
+            StAXCardBuilder builder = new StAXCardBuilder();
             builder.buildCards(data1Attribute);
             Set<Card> actual = builder.getCards();
             Set<Card> expected = new HashSet<>();
@@ -79,7 +79,7 @@ public class SaxCardBuilderTest {
     @Test
     public void testBuildCards2Attributes() {
         try {
-            SaxCardBuilder builder = new SaxCardBuilder();
+            StAXCardBuilder builder = new StAXCardBuilder();
             builder.buildCards(data2Attributes);
             Set<Card> actual = builder.getCards();
             Set<Card> expected = new HashSet<>();
@@ -97,7 +97,7 @@ public class SaxCardBuilderTest {
     @Test
     public void testBuildCardsInvertedOrderAttributes() {
         try {
-            SaxCardBuilder builder = new SaxCardBuilder();
+            StAXCardBuilder builder = new StAXCardBuilder();
             builder.buildCards(dataInvertedOrderAttribute);
             Set<Card> actual = builder.getCards();
             Set<Card> expected = new HashSet<>();
@@ -113,7 +113,7 @@ public class SaxCardBuilderTest {
 
     @Test(expectedExceptions = CardException.class)
     public void testBuildCardsWrongPath() throws CardException {
-        SaxCardBuilder builder = new SaxCardBuilder();
+        StAXCardBuilder builder = new StAXCardBuilder();
         builder.buildCards(WRONG_PATH);
     }
 }

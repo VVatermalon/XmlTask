@@ -13,6 +13,7 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.Duration;
 import java.time.LocalDateTime;
@@ -45,11 +46,14 @@ public class DOMCardBuilder extends AbstractCardBuilder {
     }
     @Override
     public void buildCards(String xmlSrc) throws CardException {
-        Document doc = null;
+        if(xmlSrc == null) {
+            logger.warn("Null parameter");
+            return;
+        }
         try {
-            doc = docBuilder.parse(xmlSrc);
+            Document doc = docBuilder.parse(xmlSrc);
             Element root = doc.getDocumentElement();
-            NodeList cardList = root.getChildNodes(); // TODO: 04.11.2021 тут другое название элемента, даже несколько будет
+            NodeList cardList = root.getChildNodes();
             for(int i=0; i<cardList.getLength(); i++) {
                 if(cardList.item(i).getNodeType() == Node.ELEMENT_NODE) {
                     Element cardElement = (Element) cardList.item(i);
@@ -57,8 +61,10 @@ public class DOMCardBuilder extends AbstractCardBuilder {
                     cards.add(card);
                 }
             }
-        } catch (IOException | SAXException e) {
-            logger.error(e);
+        } catch (IOException e) {
+            throw new CardException("Unable to open XML file " + xmlSrc, e);
+        } catch (SAXException e) {
+            throw new CardException("Error during parsing XML file " + xmlSrc, e);
         }
     }
 

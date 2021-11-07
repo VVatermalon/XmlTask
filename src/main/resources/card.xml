@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<oldCards xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-          xsi:SchemaLocation="card.xsd">
-
+<oldCards xmlns="http://example.org/OldCards">
     <storeCard id="k37">
         <theme>cars</theme>
         <type>greeting</type>
@@ -9,6 +7,24 @@
         <hasMelody>true</hasMelody>
         <price>3.33</price>
         <publicationYear>2015</publicationYear>
+    </storeCard>
+
+    <storeCard id="y79657" author="bspechat">
+        <theme>sports</theme>
+        <type>default</type>
+        <country>Russia</country>
+        <hasMelody>false</hasMelody>
+        <price>2.14</price>
+        <publicationYear>2017</publicationYear>
+    </storeCard>
+
+    <storeCard id="f79657" author="bspechat">
+        <theme>sports</theme>
+        <type>greeting</type>
+        <country>Belarus</country>
+        <hasMelody>false</hasMelody>
+        <price>4.5</price>
+        <publicationYear>2019</publicationYear>
     </storeCard>
 
     <sentCard id="i378" author="Aversev" textContent="XOXO">
@@ -19,12 +35,28 @@
         <sendingTime>2021-10-10T18:00:00</sendingTime>
     </sentCard>
 
+    <sentCard id="l0" textContent="Happy Birthday, brooo">
+        <theme>cars</theme>
+        <type>greeting</type>
+        <country>Poland</country>
+        <hasMelody>true</hasMelody>
+        <sendingTime>2021-01-02T21:00:00</sendingTime>
+    </sentCard>
+
     <sentCard id="k3" textContent="Welcome to the concert!">
         <theme>people</theme>
         <type>advertising</type>
         <country>Russia</country>
         <hasMelody>false</hasMelody>
         <sendingTime>2021-10-08T13:00:00</sendingTime>
+    </sentCard>
+
+    <sentCard id="o7">
+        <theme>animals</theme>
+        <type>default</type>
+        <country>Belarus</country>
+        <hasMelody>false</hasMelody>
+        <sendingTime>2021-10-06T13:06:00</sendingTime>
     </sentCard>
 
     <handmadeCard id="c10" author="Hey Helen">
@@ -34,5 +66,23 @@
         <hasMelody>false</hasMelody>
         <price>40</price>
         <craftingTime>PT10H</craftingTime>
+    </handmadeCard>
+
+    <handmadeCard id="n70" author="Valentine">
+        <theme>religion</theme>
+        <type>greeting</type>
+        <country>Russia</country>
+        <hasMelody>false</hasMelody>
+        <price>35</price>
+        <craftingTime>PT10H</craftingTime>
+    </handmadeCard>
+
+    <handmadeCard id="g545" author="Lalisa">
+        <theme>cityscape</theme>
+        <type>greeting</type>
+        <country>Russia</country>
+        <hasMelody>true</hasMelody>
+        <price>50</price>
+        <craftingTime>P3D</craftingTime>
     </handmadeCard>
 </oldCards>

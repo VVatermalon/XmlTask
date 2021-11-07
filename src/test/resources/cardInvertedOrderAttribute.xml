@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oldCards xmlns="http://example.org/OldCards">
+<handmadeCard author="Hey Helen" id="c10">
+    <theme>animals</theme>
+    <type>greeting</type>
+    <country>Lithuania</country>
+    <hasMelody>false</hasMelody>
+    <price>40</price>
+    <craftingTime>PT10H</craftingTime>
+</handmadeCard>
+</oldCards>

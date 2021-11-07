@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oldCards xmlns="http://example.org/OldCards">
+<sentCard id="k3" textContent="Welcome to the concert!">
+    <theme>people</theme>
+    <type>advertising</type>
+    <country>Russia</country>
+    <hasMelody>false</hasMelody>
+    <sendingTime>2021-10-08T13:00:00</sendingTime>
+</sentCard>
+</oldCards>

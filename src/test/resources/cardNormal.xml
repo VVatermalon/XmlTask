@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<oldCards xmlns="http://example.org/OldCards">
+    <sentCard id="i378" author="Aversev" textContent="XOXO">
+        <theme>animals</theme>
+        <type>greeting</type>
+        <country>Belarus</country>
+        <hasMelody>false</hasMelody>
+        <sendingTime>2021-10-10T18:00:00</sendingTime>
+    </sentCard>
+</oldCards>
